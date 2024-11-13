@@ -8,7 +8,7 @@
                 <div class="footer__logo">
                     <a href="#"><img src="<?php echo e(asset('storage/img/footer-logo.png')); ?>" alt=""></a>
                 </div>
-                <p>Chào xuân 2024, nhập Voucher MALEFASHION2024 để được giảm ngay 150.000.
+                <p>Chào xuân 2024, nhập Voucher SNEAKERDAILY2024 để được giảm ngay 150.000.
                     </p>
                 <a href="#"><img src="<?php echo e(asset('storage/img/payment.png')); ?>" alt=""></a>
             </div>
@@ -57,7 +57,7 @@
                         document.write(new Date().getFullYear());
                     </script>2024
                     All rights reserved |  <i class="fa fa-heart-o"
-                    aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Male Fashion</a>
+                    aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Sneaker Daily</a>
                 </p>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>
