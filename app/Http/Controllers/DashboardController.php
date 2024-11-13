@@ -52,7 +52,7 @@ class DashboardController extends Controller
         // Lấy tổng tiền thu nhập được của các tháng trong năm
         $revenuesMonth = Order::selectRaw('MONTH(created_at) as month, SUM(total) as total_revenue')
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-            ->where('pay', '=', 1) 
+            ->where('pay', '=', 1)
             ->groupBy('month')
             ->orderBy('month')
             ->get();

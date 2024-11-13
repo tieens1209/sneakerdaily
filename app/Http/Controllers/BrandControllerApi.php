@@ -14,7 +14,7 @@ class BrandControllerApi extends Controller
     public function index()
     {
         $brands = Brand::all();
-        if($brands){
+        if ($brands) {
             return response([
                 'data' => $brands,
                 'status_code' => 200,
@@ -45,7 +45,7 @@ class BrandControllerApi extends Controller
         $validator = Validator::make($input, [
             'name' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $arr = [
                 'success' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',
@@ -67,7 +67,7 @@ class BrandControllerApi extends Controller
      */
     public function show(Brand $brand)
     {
-        if($brand){
+        if ($brand) {
             return response([
                 'data' => $brand,
                 'status_code' => 200,
@@ -98,7 +98,7 @@ class BrandControllerApi extends Controller
         $validator = Validator::make($input, [
             'name' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $arr = [
                 'success' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',

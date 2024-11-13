@@ -101,7 +101,8 @@
                                                 src="{{ asset('storage/img/icon/compare.png') }}" alt="">
                                             <span>So sánh</span></a></li>
                                     <li><a href="{{ route('detailProduct', $product->id) }}"><img
-                                                src="{{ asset('storage/img/icon/search.png') }}" alt=""><span>Chi tiết</span></a></li>
+                                                src="{{ asset('storage/img/icon/search.png') }}" alt=""><span>Chi
+                                                tiết</span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">

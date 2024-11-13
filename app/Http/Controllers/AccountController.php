@@ -14,10 +14,12 @@ use App\Mail\VerifiEmail;
 
 class AccountController extends Controller
 {
-    public function getFormRegister(){
+    public function getFormRegister()
+    {
         return view('auth.register');
     }
-    public function submitFormRegister(Request $request){
+    public function submitFormRegister(Request $request)
+    {
         $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required',
@@ -48,39 +50,44 @@ class AccountController extends Controller
         Mail::to($request->email)->send(new VerifiEmail($information));
         return redirect()->route('login')->with('success', 'Successful registration, please verify your email');
     }
-    public function getFormLogin(){
+    public function getFormLogin()
+    {
         return view('auth.login');
     }
-    public function submitFormLogin(Request $request){
+    public function submitFormLogin(Request $request)
+    {
         $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
         $user = User::where('username', $request->username)->where('active', 1)->first();
-        if(is_null($user)){
+        if (is_null($user)) {
             return redirect()->back()->with('error', 'The account does not exist yet');
-        }else{
-            if(Hash::check($request->password, $user->password)){
+        } else {
+            if (Hash::check($request->password, $user->password)) {
                 Auth::login($user);
                 return redirect('/');
-            }else{
+            } else {
                 return redirect()->back()->with('error', 'Wrong password');
             }
         }
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
-    public function getFormForgotPassword(){
+    public function getFormForgotPassword()
+    {
         return view('auth.forgotPassword');
     }
-    public function submitFormForgotPassword(Request $request){
+    public function submitFormForgotPassword(Request $request)
+    {
         $request->validate([
             'email' => 'required|exists:users'
         ]);
         $account = User::where('email', $request->email)->where('active', 1)->first();
-        if($account){
+        if ($account) {
             //tạo token
             $token = Str::random(32);
             //cập nhật vào bản ghi
@@ -95,32 +102,35 @@ class AccountController extends Controller
             //gửi mail
             Mail::to($account->email)->send(new ForgotPassword($data));
             return redirect()->back()->with('success', 'Email sent successfully');
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Account has been locked');
         }
     }
-    public function getFormNewPassword(Request $request){
+    public function getFormNewPassword(Request $request)
+    {
         $token = User::where('id', $request->id)->first()->token;
-        if($token == $request->token){
+        if ($token == $request->token) {
             return view('auth.newPassword')->with('id', $request->id);
-        }else{
+        } else {
             return redirect()->route('forgotPassword')->with('error', 'The link has expired');
         }
     }
-    public function submitFormNewPassword(Request $request, $id){
+    public function submitFormNewPassword(Request $request, $id)
+    {
         $request->validate([
-            'password' =>' required',
+            'password' => ' required',
             'repeat_password' => 'required|same:password'
         ]);
         User::where('id', $id)->update(['password' => Hash::make($request->password)]);
         return redirect()->route('login')->with('success', 'Change password successfully');
     }
-    public function verifiEmail(Request $request){
+    public function verifiEmail(Request $request)
+    {
         $token = User::where('email', $request->email)->first()->token;
-        if($token == $request->token){
+        if ($token == $request->token) {
             User::where('email', $request->email)->update(['active' => 1]);
             return redirect()->route('login')->with('success', 'Authentication successful, please login');
-        }else{
+        } else {
             return redirect()->route('login')->with('error', 'The link has expired');
         }
     }

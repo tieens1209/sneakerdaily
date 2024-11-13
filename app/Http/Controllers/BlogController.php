@@ -23,7 +23,7 @@ class BlogController extends Controller
             ->latest('created_at')
             ->take(2)
             ->get();
-    
+
         return view('blog.detailBlog', compact('blog', 'latestBlogs'));
     }
 }

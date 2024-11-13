@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
-    public function run() : void
+    public function run(): void
     {
         $permissions = [
             ['name' => 'addBlog', 'guard_name' => 'web'],

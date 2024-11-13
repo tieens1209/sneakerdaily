@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withTrashed()->get();
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $category->qty = Product::where('idCategory', $category->id)->count();
         };
         return view('admin.category.index', compact('categories'));
@@ -89,7 +89,8 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
-    public function restore($idCategory){
+    public function restore($idCategory)
+    {
         Category::where('id', $idCategory)->restore();
         //khôi phục tất cả sản phẩm thuộc danh mục bị xóa
         Product::where('idCategory', $idCategory)->restore();
