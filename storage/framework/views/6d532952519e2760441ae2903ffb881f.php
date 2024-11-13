@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-7">
                 <div class="header__top__left">
-                    <p>Chào xuân 2024, nhập Voucher MALEFASHION2024 để được giảm ngay 150.000</p>
+                    <p>Chào xuân 2024, nhập Voucher SNEAKERDAILY2024 để được giảm ngay 150.000</p>
                 </div>
             </div>
             <div class="col-lg-6 col-md-5">
@@ -72,7 +72,7 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__text">
-        <p>Chào xuân 2024, nhập Voucher MALEFASHION2024 để được giảm ngay 150.000.
+        <p>Chào xuân 2024, nhập Voucher SNEAKERDAILY2024 để được giảm ngay 150.000.
 
         </p>
     </div>
@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-3 col-md-3">
             <div class="header__logo">
-                <a href="/"><img src="<?php echo e(asset('storage/img/logo.png')); ?>" alt=""></a>
+                <a href="/">SNEAKERDAILY</a>
             </div>
         </div>
         <div class="col-lg-6 col-md-6">
