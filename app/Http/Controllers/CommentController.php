@@ -13,8 +13,8 @@ class CommentController extends Controller
     $this->validate($request, [
       'rating' => 'required',
       'idProduct' => 'required',
-      'content'=>'required|max:300'
-    ],[
+      'content' => 'required|max:300'
+    ], [
       'rating.required' => 'Bạn cần đánh giá sao.',
       'content.required' => 'Bạn cần nhập nội dung sao.',
       'content.max' => 'Nội dung tối đa 300 kí tự.'

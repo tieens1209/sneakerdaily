@@ -22,10 +22,10 @@ class ProductController extends Controller
         // dd($products);
         $images = Image::all();
         $products->load(['size', 'category', 'brand']);
-        foreach($products as $product){
+        foreach ($products as $product) {
             //Lấy ra ảnh đầu tiên làm ảnh đại diện cho sản phẩm
-            foreach($images as $image){
-                if($image->idProduct == $product->id){
+            foreach ($images as $image) {
+                if ($image->idProduct == $product->id) {
                     $product->image = $image;
                     break;
                 }
@@ -34,22 +34,22 @@ class ProductController extends Controller
             $product->number = $product->size->S + $product->size->M + $product->size->L + $product->size->XL + $product->size->XXL + $product->size->XXXL;
             //hiển thị size đang còn của sản phẩm
             $product->sizeShow = '';
-            if($product->size->S > 0){
+            if ($product->size->S > 0) {
                 $product->sizeShow .= ' S';
             }
-            if($product->size->M > 0){
+            if ($product->size->M > 0) {
                 $product->sizeShow .= ' M';
             }
-            if($product->size->L > 0){
+            if ($product->size->L > 0) {
                 $product->sizeShow .= ' L';
             }
-            if($product->size->XL > 0){
+            if ($product->size->XL > 0) {
                 $product->sizeShow .= ' XL';
             }
-            if($product->size->XXL > 0){
+            if ($product->size->XXL > 0) {
                 $product->sizeShow .= ' XXL';
             }
-            if($product->size->XXXL > 0){
+            if ($product->size->XXXL > 0) {
                 $product->sizeShow .= ' XXXL';
             }
         }
@@ -69,10 +69,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function uploadImage($request){
+    public function uploadImage($request)
+    {
         //Xử lí upload nhiều ảnh
         $arrayName = [];
-        foreach($request->images as $image){
+        foreach ($request->images as $image) {
             $name = $image->getClientOriginalName();
             $image->storeAs('public/images/products', $name);
             array_push($arrayName, $name);
@@ -87,7 +88,7 @@ class ProductController extends Controller
             'priceSale' => 'required',
             'images' => 'required',
             'description' => 'required',
-        ],[
+        ], [
             'images.required' => 'The image field is required.'
         ]);
         //thêm sản phẩm
@@ -105,7 +106,7 @@ class ProductController extends Controller
         $idProduct = Product::orderBy('id', 'DESC')->first()->id;
         //thực hiện thêm ảnh của sản phẩm vào table Images
         $arrayNameImage =  $this->uploadImage($request);
-        foreach($arrayNameImage as $nameImage){
+        foreach ($arrayNameImage as $nameImage) {
             Image::create([
                 'srcImage' => $nameImage,
                 'idProduct' => $idProduct,
@@ -153,18 +154,18 @@ class ProductController extends Controller
             'priceSale' => 'required',
             'description' => 'required',
         ]);
-        if($request->images != null){
+        if ($request->images != null) {
             // Xóa ảnh cũ
             $images = Image::where('idProduct', $product->id)->get();
-            foreach($images as $image){
+            foreach ($images as $image) {
                 //xóa trong storage
-                Storage::delete('public/images/products/'.$image->srcImage);
+                Storage::delete('public/images/products/' . $image->srcImage);
                 //xóa trong database
                 Image::where('id', $image->id)->delete();
             }
             //Thêm ảnh mới
             $arrayNameImage = $this->uploadImage($request);
-            foreach($arrayNameImage as $nameImage){
+            foreach ($arrayNameImage as $nameImage) {
                 Image::create([
                     'srcImage' => $nameImage,
                     'idProduct' => $product->id,
@@ -202,7 +203,8 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function restore($idProduct){
+    public function restore($idProduct)
+    {
         $product = Product::withTrashed()->where('id', $idProduct)->first();
         // dd($product);
         $product->restore();

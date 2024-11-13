@@ -14,7 +14,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::withTrashed()->get();
-        foreach($brands as $brand){
+        foreach ($brands as $brand) {
             $brand->qty = Product::where('idBrand', $brand->id)->count();
         };
         return view('admin.brand.index', compact('brands'));
@@ -89,7 +89,8 @@ class BrandController extends Controller
         return redirect()->route('brand.index');
     }
 
-    public function restore($idBrand){
+    public function restore($idBrand)
+    {
         Brand::where('id', $idBrand)->restore();
         //khôi phục tất cả sản phẩm thuộc brand bị xóa
         Product::where('idBrand', $idBrand)->restore();

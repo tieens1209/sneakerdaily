@@ -19,7 +19,7 @@ class AccountControllerAdmin extends Controller
     {
         return view('admin.auth.login');
     }
-   
+
     public function submitFormLogin(Request $request)
     {
         $request->validate([

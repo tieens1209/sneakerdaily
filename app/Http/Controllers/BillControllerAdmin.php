@@ -14,12 +14,14 @@ use PDF;
 
 class BillControllerAdmin extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $bills = Order::orderByDesc('id')->get();
         $bills->load('user');
         return view('admin.bill.index', compact('bills'));
     }
-    public function detailBill($id){
+    public function detailBill($id)
+    {
         $images = Image::all();
         $bill = Order::where('id', $id)->first();
         $carts = Cart::where('idOrder', $id)->get();
@@ -27,11 +29,11 @@ class BillControllerAdmin extends Controller
             $query->withTrashed(); // Load cả sản phẩm đã bị xóa
         }]);;
         $totalBill = 0;
-        foreach($carts as $cart){
+        foreach ($carts as $cart) {
             $cart->total = $cart->product->priceSale * $cart->qty;
             $totalBill += $cart->total;
-            foreach($images as $image){
-                if($image->idProduct == $cart->product->id){
+            foreach ($images as $image) {
+                if ($image->idProduct == $cart->product->id) {
                     $cart->product->srcImage = $image->srcImage;
                     break;
                 }
@@ -39,12 +41,14 @@ class BillControllerAdmin extends Controller
         }
         return view('admin.bill.detailBill', compact('bill', 'carts', 'totalBill'));
     }
-    public function updateBill($id, Request $request){
+    public function updateBill($id, Request $request)
+    {
         Order::where('id', $id)->update(['status' => $request->status]);
         toastr()->success('Successfully', 'Updates order');
         return redirect()->route('bill.index');
     }
-    public function invoice($id){
+    public function invoice($id)
+    {
         $images = Image::all();
         $bill = Order::where('id', $id)->first();
         $carts = Cart::where('idOrder', $id)->get();
@@ -52,17 +56,17 @@ class BillControllerAdmin extends Controller
             $query->withTrashed(); // Load cả sản phẩm đã bị xóa
         }]);;
         $totalBill = 0;
-        foreach($carts as $cart){
+        foreach ($carts as $cart) {
             $cart->total = $cart->product->priceSale * $cart->qty;
             $totalBill += $cart->total;
-            foreach($images as $image){
-                if($image->idProduct == $cart->product->id){
+            foreach ($images as $image) {
+                if ($image->idProduct == $cart->product->id) {
                     $cart->product->srcImage = $image->srcImage;
                     break;
                 }
             }
         }
         $pdf = PDF::loadView('admin.bill.billPDF', array('bill' => $bill, 'carts' => $carts, 'totalBill' => $totalBill));
-        return $pdf->download('bill_'.$id.'.pdf');
+        return $pdf->download('bill_' . $id . '.pdf');
     }
 }

@@ -72,7 +72,7 @@ class BlogControllerAdmin extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Xóa ảnh cũ (nếu có)
             $imageOld = Image::where('idBlog', $blog->id)->get();
-            if ( $imageOld->count() > 0) {
+            if ($imageOld->count() > 0) {
                 Storage::delete('public/images/blogs/' .  $imageOld->first()->srcImage);
                 Image::where('id',  $imageOld->first()->id)->delete();
             }

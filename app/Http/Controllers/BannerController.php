@@ -67,10 +67,10 @@ class BannerController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        if($request->image != null){
+        if ($request->image != null) {
             $image = $request->image->getClientOriginalName();
             $request->image->storeAs('public/images/banners', $image);
-        }else{
+        } else {
             $image = $banner->srcImage;
         }
         $banner->fill([
