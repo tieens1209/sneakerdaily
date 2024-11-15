@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?>
     Trang chủ
 <?php $__env->stopSection(); ?>
@@ -101,7 +100,8 @@
                                                 src="<?php echo e(asset('storage/img/icon/compare.png')); ?>" alt="">
                                             <span>So sánh</span></a></li>
                                     <li><a href="<?php echo e(route('detailProduct', $product->id)); ?>"><img
-                                                src="<?php echo e(asset('storage/img/icon/search.png')); ?>" alt=""><span>Chi tiết</span></a></li>
+                                                src="<?php echo e(asset('storage/img/icon/search.png')); ?>" alt=""><span>Chi
+                                                tiết</span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">

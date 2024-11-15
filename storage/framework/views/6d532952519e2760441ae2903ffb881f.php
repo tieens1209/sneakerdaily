@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-3 col-md-3">
             <div class="header__logo">
-                <a href="/">SNEAKERDAILY</a>
+                <a href="/"><img src="<?php echo e(asset('storage/img/logo.png')); ?>" alt=""></a>
             </div>
         </div>
         <div class="col-lg-6 col-md-6">

@@ -94,7 +94,7 @@
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="{{ route('product.index') }}" aria-expanded="false">
                                     <span>
-                                        <i class="fa-solid fa-shirt"></i>
+                                        <i class="fa-solid fa-shoe-prints"></i>
                                     </span>
                                     <span class="hide-menu">Sản phẩm</span>
                                 </a>

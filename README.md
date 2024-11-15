@@ -15,6 +15,10 @@
 
     php artisan migrate
 
+## Run the database seeders
+
+    php artisan db:seed PermissionSeeder
+
 ## Run Project
 
     npm start
